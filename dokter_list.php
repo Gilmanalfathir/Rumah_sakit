@@ -1,0 +1,62 @@
+<?php include("C:/xampp/htdocs/rumah_sakit/config.php"); ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pendataan Dokter | Rumah Sakit Jaya</title>
+	<link rel="stylesheet"  href="../style.css">
+</head>
+
+<body>
+	<header>
+		<h3>Siswa yang sudah mendaftar</h3>
+	</header>
+	
+	<nav>
+		<a href="dokter_addform.php" class="button1"> Tambah Baru </a>
+	</nav>
+	
+	<br>
+	
+	<table class="tbl">
+	<thead>
+		<tr>
+			<th>Id_dokter</th>
+			<th>Nama</th>
+			<th>Spesialis</th>
+			<th>Format</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<?php
+		$sql = "SELECT * FROM dokter";
+		$query = mysqli_query($db, $sql);
+		
+		while($dokter = mysqli_fetch_array($query)){
+			echo "<tr>";
+			
+			echo "<td>".$dokter['id_dokter']."</td>";
+			echo "<td>".$dokter['nama_dokter']."</td>";
+			echo "<td>".$dokter['spesialis']."</td>";
+
+			
+			echo "<td>";
+			echo "<a href='dokter_formedit.php?id=".$dokter['id_dokter']."'>Edit</a> | ";
+			echo "<a href='dokter_hapus.php?id=".$dokter['id_dokter']."'>Hapus</a>";
+			echo "</td>";
+			
+			echo "</tr>";
+		}		
+		?>
+		
+	</tbody>
+	</table>
+	<p>Total: <?php echo mysqli_num_rows($query) ?></p>
+	<nav>
+		<a href="../index.php" class="button1"> Kembali ke Menu </a>
+	</nav>
+	
+	</body>
+</html>
